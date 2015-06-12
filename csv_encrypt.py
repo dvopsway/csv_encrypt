@@ -1,5 +1,6 @@
 from pandas import *
 import os
+import math
 from AESCipher import AESCipher
 
 def list_files(path):
@@ -32,13 +33,13 @@ for csv_file in csv_files:
         # i = 0
         # print(index)
         for col in columns_to_encrypt:
-            if row[col] == 'NaN':
-                data.loc[index, col] = row[col]
-            else:
-                if isinstance(row[col], float):
+            if isinstance(row[col], float):
+                if math.isnan(row[col]):
+                    row[col] = str(row[col])
+                else:
                     row[col] = int(row[col])
-                encoded = cypher_obj.encrypt(row[col])
-                data.loc[index, col] = encoded
+            encoded = cypher_obj.encrypt(row[col])
+            data.loc[index, col] = encoded
             # print(encoded + " " + cypher_obj.decrypt(encoded))
             # mapping_df.loc[index, encrpyt_mapping[i]] = row[col]
             # mapping_df.loc[index, encrpyt_mapping[i+1]] = encoded
