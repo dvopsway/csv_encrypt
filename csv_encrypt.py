@@ -29,17 +29,19 @@ for csv_file in csv_files:
     mapping_df = DataFrame(columns=encrpyt_mapping)
     data = read_csv(os.path.join(csv_dir, csv_file), error_bad_lines=False, names=header_row, dtype='unicode')
     print "Encrypting of data in csv file %s is starting" % csv_file
-    for index, row in data.iterrows():
-        # i = 0
-        # print(index)
-        for col in columns_to_encrypt:
-            if isinstance(row[col], float):
+
+    for col in columns_to_encrypt:
+        print(col)
+        for index, row in data.iterrows():
+            # i = 0
+            """if isinstance(row[col], float):
                 if math.isnan(row[col]):
                     row[col] = str(row[col])
                 else:
-                    row[col] = int(row[col])
-            encoded = cypher_obj.encrypt(row[col])
-            data.loc[index, col] = encoded
+                    row[col] = int(row[col])"""
+            data.loc[index, col] = cypher_obj.encrypt(str(row[col]))
+            #encoded = cypher_obj.encrypt(str(row[col]))
+            #data.loc[index, col] = encoded
             # print(encoded + " " + cypher_obj.decrypt(encoded))
             # mapping_df.loc[index, encrpyt_mapping[i]] = row[col]
             # mapping_df.loc[index, encrpyt_mapping[i+1]] = encoded
