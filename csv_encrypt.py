@@ -11,7 +11,7 @@ def list_files(path):
     return files
 
 # Configuration
-csv_dir = "C:\Users\mmt5267\Desktop\BLR_Data\Hotel_Data\split"
+csv_dir = "/path/to/split/dir"
 csv_files = list_files(os.path.join(csv_dir))
 cypher_obj = AESCipher('2805')
 header_row = ['col1', 'col2', 'col3', 'col4', 'col5', 'col6', 'col7',
